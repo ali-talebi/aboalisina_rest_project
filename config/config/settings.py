@@ -41,10 +41,18 @@ INSTALLED_APPS = [
 
     ###### APPS ######
     "HOME_APP.apps.HomeAppConfig",
+    "blog.apps.BlogConfig",
+    'PERSON_IDEA.apps.PersonIdeaConfig',
+    'school.apps.SchoolConfig',
+    'accounts.apps.AccountsConfig',
+    
     
     ##### third-party #####
     'rest_framework',
-     
+    'corsheaders',
+     'drf_yasg',
+     'django_jalali',
+     'rest_framework_simplejwt',
     
 
 ]
@@ -52,12 +60,18 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = ["*"]
+
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -127,3 +141,24 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_ROOT = "media/"
 MEDIA_URL  = "/media/"
+
+
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
+
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+}
