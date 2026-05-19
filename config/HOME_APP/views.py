@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response 
 from rest_framework.views import APIView 
-from .models import Banner_Slider
-from .serializers import Banner_Slider_Serializer 
+from .models import Banner_Slider , LOGO
+from .serializers import Banner_Slider_Serializer , LOGO_SERIALIZER 
 from drf_yasg.utils import swagger_auto_schema
 
 # Create your views here.
@@ -23,3 +23,10 @@ class Banner_Slider_View(APIView):
         serializer = Banner_Slider_Serializer(instance=banners,many=True)
         return Response(data=serializer.data)
     
+
+class LOGO_View(APIView):
+    
+    def get(self,request):
+        total_logos = LOGO.objects.all()
+        serializer = LOGO_SERIALIZER(instance=total_logos,many=True)
+        return Response(data=serializer.data)

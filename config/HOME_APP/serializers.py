@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Banner_Slider 
+from .models import Banner_Slider , LOGO 
 
 
 class Banner_Slider_Serializer(serializers.ModelSerializer):
@@ -8,3 +8,11 @@ class Banner_Slider_Serializer(serializers.ModelSerializer):
         fields = "__all__"
         
 
+
+class LOGO_SERIALIZER(serializers.ModelSerializer):
+    
+    class Meta:
+        model  = LOGO
+        fields = ['name','logo_picture']
+
+    

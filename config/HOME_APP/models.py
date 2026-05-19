@@ -27,4 +27,16 @@ class Banner_Slider(models.Model):
     
     
     
+class LOGO(models.Model):
+    name = models.CharField(max_length=50)
+    logo_picture = models.FileField(upload_to="logos_picture/")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return f'{self.name}'
+    
+    class Meta:
+        db_table = "logo_table"
+        verbose_name = "logo management"
+        
